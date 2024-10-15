@@ -2,49 +2,101 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENDPOINTS} from '../../models/endpoints';
+import { environment } from '../../../environments/environment';
+import { GiphyApiResponse } from '../../models/giphy.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GiphyApiService {
-
-  private apiKey = 'dhTc3yRsj1LNS7LX8G47t5vPmyOCoLPv';
-
   constructor(private http: HttpClient) {}
 
-  searchGifs(query: string, limit = 25, offset = 0): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.SEARCH_GIFS}?api_key=${this.apiKey}&q=${query}&limit=${limit}&offset=${offset}`
+  /**
+   * Searches for GIFs based on the provided query.
+   *
+   * @param query - The search term to query GIFs.
+   * @param offset - The starting position of the results (default is 0).
+   * @param limit - The maximum number of results to return (default is 25).
+   * @returns An Observable of GiphyApiResponse containing the search results.
+   */
+  public searchGifs(
+    query: string,
+    offset: number = 0,
+    limit: number = 25
+  ): Observable<GiphyApiResponse> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.SEARCH_GIFS}?api_key=${environment.giphyApiKey}&q=${query}&limit=${limit}&offset=${offset}`
     );
-  };
+  }
 
-  searchStickers(query: string, limit = 25, offset = 0): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.SEARCH_STICKERS}/search?api_key=${this.apiKey}&q=${query}&limit=${limit}&offset=${offset}`
+  /**
+   * Searches for stickers using the Giphy API.
+   *
+   * @param query - The search term to query for stickers.
+   * @param limit - The maximum number of results to return (default is 25).
+   * @param offset - The number of results to skip from the beginning (default is 0).
+   * @returns An Observable that emits the Giphy API response containing the search results.
+   */
+  public searchStickers(
+    query: string,
+    limit = 25,
+    offset = 0
+  ): Observable<GiphyApiResponse> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.SEARCH_STICKERS}/search?api_key=${environment.giphyApiKey}&q=${query}&limit=${limit}&offset=${offset}`
     );
-  };
+  }
 
-  getTrendingGifs(limit = 25, offset = 0): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.TRENDING_GIFS}?api_key=${this.apiKey}&limit=${limit}&offset=${offset}`
+  /**
+   * Fetches trending GIFs from the Giphy API.
+   *
+   * @param {number} [limit=25] - The number of GIFs to retrieve. Defaults to 25.
+   * @param {number} [offset=0] - The offset for pagination. Defaults to 0.
+   * @returns {Observable<GiphyApiResponse>} An observable containing the response from the Giphy API.
+   */
+  public getTrendingGifs(limit = 25, offset = 0): Observable<GiphyApiResponse> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.TRENDING_GIFS}?api_key=$environment.giphyApiKey}&limit=${limit}&offset=${offset}`
     );
-  };
+  }
 
-  getTrengingStickers(limit = 25, offset = 0): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.TRENDING_STICKERS}?api_key=${this.apiKey}&limit=${limit}&offset=${offset}`
+  /**
+   * Fetches trending stickers from the Giphy API.
+   *
+   * @param limit - The maximum number of stickers to return. Defaults to 25.
+   * @param offset - The number of stickers to skip before starting to collect the result set. Defaults to 0.
+   * @returns An Observable that emits the response from the Giphy API containing the trending stickers.
+   */
+  public getTrengingStickers(
+    limit = 25,
+    offset = 0
+  ): Observable<GiphyApiResponse> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.TRENDING_STICKERS}?api_key=${environment.giphyApiKey}&limit=${limit}&offset=${offset}`
     );
-  };
+  }
 
-  getGifById(id: string): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.GIF_BY_ID}${id}?api_key=${this.apiKey}`
+  /**
+   * Fetches a GIF by its unique identifier.
+   *
+   * @param id - The unique identifier of the GIF to be fetched.
+   * @returns An Observable that emits the response containing the GIF data.
+   */
+  public getGifById(id: string): Observable<any> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.GIF_BY_ID}${id}?api_key=${environment.giphyApiKey}`
     );
-  };
+  }
 
-  getStickerById(id: string): Observable<any> {
-    return this.http.get(
-      `${ENDPOINTS.STICKER_BY_ID}${id}?api_key=${this.apiKey}`
+  /**
+   * Retrieves a sticker by its unique identifier.
+   *
+   * @param id - The unique identifier of the sticker.
+   * @returns An Observable that emits the GiphyApiResponse containing the sticker data.
+   */
+  public getStickerById(id: string): Observable<GiphyApiResponse> {
+    return this.http.get<GiphyApiResponse>(
+      `${ENDPOINTS.STICKER_BY_ID}${id}?api_key=${environment.giphyApiKey}`
     );
-  };
+  }
 }

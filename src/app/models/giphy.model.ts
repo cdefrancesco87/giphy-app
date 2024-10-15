@@ -1,10 +1,16 @@
-interface GiphyApiResponse {
+/**
+ * Represents the response from the Giphy API.
+ */
+export interface GiphyApiResponse {
   data: GifObject[];
   meta: Meta;
   pagination: Pagination;
 }
 
-interface GifObject {
+/**
+ * Represents a GIF object returned by the Giphy API.
+ */
+export interface GifObject {
   type: string;
   id: string;
   url: string;
@@ -29,7 +35,10 @@ interface GifObject {
   alt_text: string;
 }
 
-interface Images {
+/**
+ * Represents the different image formats available for a GIF.
+ */
+export interface Images {
   original: ImageFormat;
   downsized: ImageFormat;
   downsized_large: ImageFormat;
@@ -55,20 +64,29 @@ interface Images {
   '480w_still': ImageFormat;
 }
 
-interface ImageFormat {
+/**
+ * Represents the format of an image.
+ */
+export interface ImageFormat {
   url: string;
   width: string;
   height: string;
   size?: string;
 }
 
-interface VideoFormat {
+/**
+ * Represents the format of a video.
+ */
+export interface VideoFormat {
   mp4: string;
   mp4_size?: string;
   width: string;
   height: string;
 }
 
+/**
+ * Represents a user on Giphy.
+ */
 interface User {
   avatar_url: string;
   banner_image: string;
@@ -82,23 +100,35 @@ interface User {
   is_verified: boolean;
 }
 
+/**
+ * Represents analytics information for a GIF.
+ */
 interface Analytics {
   onload: AnalyticsEvent;
   onclick: AnalyticsEvent;
   onsent: AnalyticsEvent;
 }
 
+/**
+ * Represents an analytics event.
+ */
 interface AnalyticsEvent {
   url: string;
 }
 
+/**
+ * Represents metadata about the Giphy API response.
+ */
 interface Meta {
   status: number;
   msg: string;
   response_id: string;
 }
 
-interface Pagination {
+/**
+ * Represents pagination information for the Giphy API response.
+ */
+export interface Pagination {
   total_count: number;
   count: number;
   offset: number;
