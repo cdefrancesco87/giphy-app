@@ -16,13 +16,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - `/assets`: Assets and styles used across the whole application.
 - `/environments`: Configuration files for different environments, like development and production.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to Run
+1. Install dependencies: `npm install`
+2. Start the application: `ng serve`
+3. Open the browser at `http://localhost:4200/`
 
 ## Build
 
