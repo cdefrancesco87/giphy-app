@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
+
+## Libraries Used
+- **Angular Material**: For building a responsive and modern UI.
+- **RxJS**: For handling streams of data and API requests.
+- **ngx-infinite-scroll**: For implementing infinite scrolling.
+
+## Project Structure
+- `/app/components`: Contains all the components like search bar, gif list, and gif details.
+- `/app/services`: Contains services for API requests.
+- `/app/store`: NgRx state management for favorite GIFs.
+- `/app/models`: Interfaces used across the whole application.
+- `/assets`: Assets and styles used across the whole application.
+- `/environments`: Configuration files for different environments, like development and production.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
