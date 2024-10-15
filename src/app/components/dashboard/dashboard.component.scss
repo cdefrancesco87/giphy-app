@@ -1,0 +1,34 @@
+.dashboard {
+  padding: 3rem;
+
+  &__header {
+    background-color: #fff;
+  }
+
+  .dashboard__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard__search-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard__search-field {
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+
+  .dashboard__search-button {
+    background-color: #1976d2;
+    color: #fff;
+  }
+
+  .dashboard__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
