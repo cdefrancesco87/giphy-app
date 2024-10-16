@@ -5,17 +5,29 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Libraries Used
 - **Angular Material**: For building a responsive and modern UI.
-- **Bootstrap**: To use mode responsive CSS rules.
+- **Bootstrap**: To use modern responsive CSS rules.
 - **RxJS**: For handling streams of data and API requests.
 - **ngx-infinite-scroll**: For implementing infinite scrolling.
+- **NgRx**: For state management.
+- **Angular Forms**: For building and managing forms.
+- **Angular Router**: For handling navigation and routing.
+- **HttpClientModule**: For making HTTP requests.
+
 
 ## Project Structure
-- `/app/components`: Contains all the components like search bar, gif list, and gif details.
-- `/app/services`: Contains services for API requests.
-- `/app/store`: NgRx state management for favorite GIFs.
-- `/app/models`: Interfaces used across the whole application.
-- `/assets`: Assets and styles used across the whole application.
-- `/environments`: Configuration files for different environments, like development and production.
+- `/src/app/components`: Contains all the components diveded into:
+  - `/src/app/components/core`: Contains all the main components, used only once:
+  - `/src/app/components/shared`: Contains all the shared components used more than once:
+- `/src/app/models`: Interfaces used across the whole application.
+- `/src/app/services`: Contains services for API requests.
+- `/src/app/store`: NgRx state management for favorite GIFs.
+- `/src/assets`: Images and styles used across the whole application; the `/src/assets/scss` should contain files as:
+  - `custom-theme.scss`: the file that contains all the theme variations.
+  - `custom-material.scss`: the file that contains all the material components customizations.
+  - `mixins.scss`: the file that contains all the mixins
+  - `variables.scss`: the file that contains all the variables (e.g. the main color variation for the branding).
+- `/src/environments`: Configuration files for different environments (e.g. dev.environment.ts, prod.environment.ts [...]).
+
 
 ## How to Run
 1. Install dependencies: `npm install`
