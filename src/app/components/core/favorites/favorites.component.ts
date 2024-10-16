@@ -32,10 +32,12 @@ export class FavoritesComponent {
     });
   }
 
-  public onCardClick(gifObject: GifObject): void {
-    // console.info('GIF ID:', gifObject.id);
-  }
-
+  /**
+   * Redirects the user to the home page.
+   *
+   * This method utilizes the Angular Router to navigate the user to the root path ('/').
+   *
+   */
   public redirectToHome() {
     this.router.navigate(['/']);
   }

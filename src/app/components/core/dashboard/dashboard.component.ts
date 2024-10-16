@@ -2,25 +2,30 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
 import { GiphyApiService } from '../../../services/giphy-api/giphy-api.service';
 import { GifObject } from '../../../models/giphy.model';
 import { DashboardFacade } from '../../../store/dashboard/dashboard.facade';
 import { GifCardComponent } from '../../shared/gif-card/gif-card.component';
 import { HeaderComponent } from "../../shared/header/header.component";
-import { Router } from '@angular/router';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 
-const MAT_MODULES = [MatGridListModule];
-const SHARED_COMPONENTS = [SearchBarComponent, GifCardComponent, HeaderComponent];
-const DIRECTIVES = [InfiniteScrollDirective];
+const MAT_MODULES = [MatGridListModule];  // Material modules used in the component
+const SHARED_COMPONENTS = [SearchBarComponent, GifCardComponent, HeaderComponent];  // Shared components used in the component
+const DIRECTIVES = [InfiniteScrollDirective]; // Directives used in the component
 
-const SERVICES = [GiphyApiService, DashboardFacade];
+const SERVICES = [GiphyApiService, DashboardFacade];  // Services used in the component
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MAT_MODULES, SHARED_COMPONENTS, DIRECTIVES, NavbarComponent],
+  imports: [
+    CommonModule,
+    MAT_MODULES,
+    SHARED_COMPONENTS,
+    DIRECTIVES,
+    NavbarComponent
+  ],
   providers: [SERVICES],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
@@ -89,6 +94,18 @@ export class DashboardComponent {
     this.dashboardFacade.updateGifsList(query, currentOffset + 1);
   }
 
+  /**
+   * Sorts the GIF cards based on the import date in either ascending or descending order.
+   *
+   * @param $event - A string indicating the sort order. It can be either 'asc' for ascending or 'desc' for descending.
+   *
+   * The function first checks the value of the `$event` parameter to determine the sort order.
+   * - If the sort order is 'asc', it sorts the `gifsDataResponse` array in ascending order based on the `import_datetime` property of each GIF.
+   * - If the sort order is 'desc', it sorts the `gifsDataResponse` array in descending order based on the `import_datetime` property of each GIF.
+   *
+   * The sorting is performed by creating a new array using the spread operator to avoid mutating the original array.
+   * The `import_datetime` property is converted to a timestamp using `getTime()` for accurate comparison.
+   */
   public sortCards($event: string): void {
     let sortOrder = $event;
     if (sortOrder === 'asc') {

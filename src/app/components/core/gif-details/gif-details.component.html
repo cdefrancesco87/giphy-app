@@ -17,10 +17,10 @@
       >
     </div>
     <div class="col-12 col-md-4">
-      <p><b>Author:</b> {{ (gifObject.user?.display_name + ' (' + gifObject.username + ')') || 'Unknown' }}</p>
+      <p><b>Author:</b> {{ gifObject.user?.display_name && gifObject.user?.username? (gifObject.user?.display_name + ' (' + gifObject.username + ')') : 'Unknown' }}</p>
       <p><b>Import date:</b> {{ (gifObject.import_datetime | date: 'dd/MM/yyyy') || 'Unknown' }}</p>
       <p><b>Rating:</b> {{ (gifObject.rating | uppercase) || 'Unknown' }}</p>
-      <p><b>Source:</b>
+      <p><b>Source: </b>
         @if(gifObject.source){
           <a [href]="gifObject.source" target="_blank">{{ gifObject.source }}</a>
         } @else {

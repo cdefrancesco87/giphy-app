@@ -28,6 +28,57 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - `variables.scss`: the file that contains all the variables (e.g. the main color variation for the branding).
 - `/src/environments`: Configuration files for different environments (e.g. dev.environment.ts, prod.environment.ts [...]).
 
+### Components description
+All the application has been developed using standalone components for an improved and more easy to mantain structure.
+As Described in "Project Structure", there are two kind of components:
+- Core components
+- Shared components
+
+### Core components
+
+#### Dashboard component: 
+This component manages the main page; in thi ssection, user can search, view, add to favorites and sort by date new Gifs from Giphy with a keyword based search.
+
+For every search, first 50 results are fetched from the API, and as soon as the user does scroll to bottom, ngx-infinite-scroll directive triggers a new API call to append the new gifs to the list.
+
+To manage the favorites, there is a toggle button, on the right bottom corner of the images, that triggers a function that updates a json into the local storage to maintain the record of which are the favorites gifs selected.
+
+#### Favorites component: 
+This component manages the favorites list display; on this page, as the Dashbord component, user could open a specific gif details or delete the gif from the favorites list.
+
+#### Gif-details component:
+This component shows the selected gif details; here the user can view the gif in is full size, add it to favorites (WIP), and read other details as Author, import date, rating, source URL, User's website and Giphy's original url.
+
+### Shared components
+
+#### Gif-card component:
+This component shows a single gif image and is used into mosaic layouts; this component does also manage the toggle favorite button throgh a dedicated service (FavoriteService) and the material-spinner show/hide while the image is loading.
+
+#### Header component:
+A simple header component, to manage the title and subtitle for each single app section
+
+#### Navbar component:
+A simple navbar component, to manage the navigation
+
+#### Searchbar component:
+A simple component that does contain the search input and the order by select; it does emit separate events to trigger search service and order list method
+
+### Models
+This folder contains some interfaces, for customize the variables type, and endpoints, used to avoid to hardcode the API endpoints.
+
+### Services
+This folder contains the services used to retrieve the data from the APIs and to manage favorite toggle functionality; usually, in larger applications, this folder could be placed into the single stand-alone components to improve the scalability of the application itself.
+
+### Store
+This folder contains all the files necessary for managing the NgRx store, including:
+
+- Selectors: used to select and derive pieces of state.
+- Actions: the actions that can be dispatched to change the state.
+- Reducers: functions used to handle state transitions based on actions.
+- Facades: interfaces used to interact with complex subsystems, that provides a higher-level API for state management.
+- Effects: used to handle asynchronous operations.
+
+These files work together to manage the application's state in a predictable and more scalable way.
 
 ## How to Run
 1. Install dependencies: `npm install`

@@ -11,6 +11,6 @@
 }
 <div class="dashboard__grid">
   @for(item of favorites; track item){
-    <app-gif-card [gifObject]="item" (click)="onCardClick(item)"/>
+    <app-gif-card [gifObject]="item" />
   }
 </div>

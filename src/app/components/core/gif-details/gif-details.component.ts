@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
 
 
 
-const MAT_MODULES = [MatProgressSpinnerModule];
-const SHARED_COMPONENTS = [HeaderComponent];
-const SERVICES = [GiphyApiService, DashboardFacade];
+const MAT_MODULES = [MatProgressSpinnerModule]; // Array of Material modules
+const SHARED_COMPONENTS = [HeaderComponent];  // Array of shared components
+const SERVICES = [GiphyApiService, DashboardFacade];  // Array of services
 
 @Component({
   selector: 'app-gif-details',
@@ -62,6 +62,13 @@ export class GifDetailsComponent {
     }
   }
 
+  /**
+   * Initializes the properties of the GIF details component.
+   *
+   * @remarks
+   * This method should be called to ensure that the component properties are correctly initialized
+   * before rendering the GIF details.
+   */
   public initComponentProperties(): void {
     // Initialize the component properties
     this.imageSrc = this.gifObject.images.original.url;
@@ -70,6 +77,7 @@ export class GifDetailsComponent {
     this.altText = this.gifObject.title;
     this.username = this.gifObject.username;
   }
+
   /**
    * Handles the load event for the GIF card component.
    *
