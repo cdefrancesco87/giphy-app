@@ -22,7 +22,7 @@ export class DashboardEffects {
       switchMap((action) =>
         this.giphyApiService.searchGifs(action.query).pipe(
           map((response: GiphyApiResponse) => {
-            localStorage.setItem('gifs', JSON.stringify(response.data));
+            // localStorage.setItem('gifs', JSON.stringify(response.data));
             localStorage.setItem(
               'offset',
               response.pagination.offset.toString()

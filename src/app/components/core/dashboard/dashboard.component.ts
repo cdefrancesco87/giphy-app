@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { GiphyApiService } from '../../services/giphy-service/giphy-api.service';
-import { GifObject } from '../../models/giphy.model';
+import { GiphyApiService } from '../../../services/giphy-service/giphy-api.service';
+import { GifObject } from '../../../models/giphy.model';
 import { Store } from '@ngrx/store';
-import { DashboardFacade } from '../../store/dashboard/dashboard.facade';
-import { GifCardComponent } from '../gif-card/gif-card.component';
+import { DashboardFacade } from '../../../store/dashboard/dashboard.facade';
+import { GifCardComponent } from '../../shared/gif-card/gif-card.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +27,6 @@ export class DashboardComponent {
   public gifsDataResponse: GifObject[] = []; // Array to hold GIF data
   public items: string[] = []; // Array for items (not used in current code)
   private dashboardFacade = inject(DashboardFacade); // Injecting DashboardFacade
-  private store = inject(Store); // Injecting Store
 
   constructor(public giphyApiService: GiphyApiService) {
     this.getGifs(); // Fetch initial GIFs
@@ -85,7 +84,7 @@ export class DashboardComponent {
       console.error('Invalid offset value in localStorage');
     }
     const query = localStorage.getItem('query') || '';
-    this.dashboardFacade.updateGifsList(query, (currentOffset + 1));
+    this.dashboardFacade.updateGifsList(query, currentOffset + 1);
   }
 
   /**
@@ -97,31 +96,24 @@ export class DashboardComponent {
    * @param {any} item - The clicked GIF item.
    * @returns {void}
    */
-  public onCardClick(item: any): void { }
-
-  /**
-   * Determines the colspan for a GIF card based on its dimensions.
-   *
-   * This method calculates the colspan for a GIF card. If the width of the GIF
-   * is greater than its height, it returns 2; otherwise, it returns 1.
-   *
-   * @param {any} item - The GIF item with width and height properties.
-   * @returns {number} - The colspan value (2 or 1).
-   */
-  public getColspan(item: GifObject): number {
-    return item.images.preview_webp.width > item.images.preview_webp.height ? 2 : 1;
+  public onCardClicked(gifObject: GifObject): void {
+    console.info('Dashboard GIF ID:', gifObject.id);
   }
 
-  /**
-   * Determines the rowspan for a GIF card based on its dimensions.
-   *
-   * This method calculates the rowspan for a GIF card. If the width of the GIF
-   * is greater than its height, it returns 1; otherwise, it returns 2.
-   *
-   * @param {any} item - The GIF item with width and height properties.
-   * @returns {number} - The rowspan value (1 or 2).
-   */
-  public getRowspan(item: any): number {
-    return item.images.preview_webp.width > item.images.preview_webp.height ? 1 : 2;
+  public sortCards($event: string): void {
+    let sortOrder = $event;
+    if (sortOrder === 'asc') {
+      this.gifsDataResponse = [...this.gifsDataResponse].sort(
+        (a, b) =>
+          new Date(a.import_datetime).getTime() -
+          new Date(b.import_datetime).getTime()
+      );
+    } else if (sortOrder === 'desc') {
+      this.gifsDataResponse = [...this.gifsDataResponse].sort(
+        (a, b) =>
+          new Date(b.import_datetime).getTime() -
+          new Date(a.import_datetime).getTime()
+      );
+    }
   }
 }

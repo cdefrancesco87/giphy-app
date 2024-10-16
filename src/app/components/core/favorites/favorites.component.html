@@ -1,0 +1,12 @@
+<div class="favorites">
+  <div class="favorites__header">
+    <h1 class="favorites__title">Search it on giphy</h1>
+    <p class="favorites__subtitle">Search for your favorite gifs! Insert a keyword and press search to start.</p>
+  </div>
+  <div class="favorites__grid"
+  >
+    @for(item of gifsDataResponse; track item){
+      <app-gif-card [gifObject]="item" (click)="onCardClick(item)"/>
+    }
+  </div>
+</div>

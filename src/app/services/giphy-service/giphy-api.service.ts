@@ -16,13 +16,13 @@ export class GiphyApiService {
    *
    * @param query - The search term to query GIFs.
    * @param offset - The starting position of the results (default is 0).
-   * @param limit - The maximum number of results to return (default is 25).
+   * @param limit - The maximum number of results to return (default is 50).
    * @returns An Observable of GiphyApiResponse containing the search results.
    */
   public searchGifs(
     query: string,
     offset: number = 0,
-    limit: number = 25
+    limit: number = 50
   ): Observable<GiphyApiResponse> {
     return this.http.get<GiphyApiResponse>(
       `${ENDPOINTS.SEARCH_GIFS}?api_key=${environment.giphyApiKey}&q=${query}&limit=${limit}&offset=${offset}`

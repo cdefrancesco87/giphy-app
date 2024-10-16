@@ -1,0 +1,18 @@
+.searchbar {
+  &__search-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__search-field {
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+
+  &__search-button {
+    background-color: #1976d2 !important;
+    color: #ffffff !important;
+    border-radius: 3px !important;
+  }
+}

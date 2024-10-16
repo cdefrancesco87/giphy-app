@@ -1,0 +1,17 @@
+<div class="gif-card">
+  @if(isLoading){
+    <div class="loader-container" [style.height.px]="imageHeight" [style.width.px]="imageWidth">
+      <mat-spinner></mat-spinner>
+    </div>
+
+  }
+  <img
+    [src]="imageSrc"
+    alt="{{ altText }}"
+    [hidden]="isLoading"
+    (load)="onLoad()"
+    (error)="onError()"
+  >
+  <!-- <img [src]="imageSrc" alt="{{ altText }}">
+  <p>{{ username }}</p> -->
+</div>
