@@ -4,8 +4,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GifObject } from '../../../models/giphy.model';
 import { MatIconModule } from '@angular/material/icon';
 import { FavoriteService } from '../../../services/favorite/favorite.service';
+import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
-const MAT_MODULES = [MatProgressSpinnerModule, MatIconModule];
+const MAT_MODULES = [MatProgressSpinnerModule, MatButtonModule, MatIconModule];
 
 @Component({
   selector: 'app-gif-card',
@@ -28,7 +30,10 @@ export class GifCardComponent {
 
   public isLoading = true;
 
-  constructor(private favoriteService: FavoriteService) {}
+  constructor(
+    private favoriteService: FavoriteService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // Check if the current GIF is in the favorites list
@@ -37,11 +42,24 @@ export class GifCardComponent {
       (gif: GifObject) => gif.id === this.gifObject.id
     );
     // Initialize the component properties
-    this.imageSrc = this.gifObject.images.fixed_width.url;
-    this.imageHeight = this.gifObject.images.fixed_width.height;
-    this.imageWidth = this.gifObject.images.fixed_width.width;
+    this.imageSrc = this.gifObject.images.fixed_height.url;
+    this.imageHeight = this.gifObject.images.fixed_height.height;
+    this.imageWidth = this.gifObject.images.fixed_height.width;
     this.altText = this.gifObject.title;
     this.username = this.gifObject.username;
+  }
+
+  /**
+   * Handles the click event on a GIF card.
+   *
+   * This method is triggered when a GIF card is clicked. It logs the clicked
+   * GIF item to the console.
+   *
+   * @param {any} item - The clicked GIF item.
+   * @returns {void}
+   */
+  public openGifDetails(): void {
+    this.router.navigate([`/gif/${this.gifObject.id}`]);
   }
 
   /**

@@ -4,10 +4,14 @@
     <span class="navbar-toggler-icon"></span  >
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item" *ngFor="let item of navigationItems">
         <a class="nav-link" href="{{ item.url }}">{{ item.title }}</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link  fw-bold" href="https://giphy.com/gifs/rickroll-rick-astley-never-gonna-give-you-up-Vuw9m5wXviFIQ" target="_blank">Giphy most rated gif</a>
+      </li>
     </ul>
+    <a class="nav-link me-5" href="https://www.linkedin.com/in/claudio-de-francesco-63a56a2a/" target="_blank">Who did this?</a>
   </div>
 </nav>

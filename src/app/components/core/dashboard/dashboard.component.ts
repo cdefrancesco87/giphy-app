@@ -30,7 +30,7 @@ export class DashboardComponent {
   public items: string[] = []; // Array for items (not used in current code)
   private dashboardFacade = inject(DashboardFacade); // Injecting DashboardFacade
 
-  constructor(public giphyApiService: GiphyApiService, private router: Router) {
+  constructor(public giphyApiService: GiphyApiService) {
     this.getGifs(); // Fetch initial GIFs
   }
 
@@ -87,19 +87,6 @@ export class DashboardComponent {
     }
     const query = localStorage.getItem('query') || '';
     this.dashboardFacade.updateGifsList(query, currentOffset + 1);
-  }
-
-  /**
-   * Handles the click event on a GIF card.
-   *
-   * This method is triggered when a GIF card is clicked. It logs the clicked
-   * GIF item to the console.
-   *
-   * @param {any} item - The clicked GIF item.
-   * @returns {void}
-   */
-  public onCardClicked(gifObject: GifObject): void {
-    this.router.navigate([`/gif/${gifObject.id}`]);
   }
 
   public sortCards($event: string): void {

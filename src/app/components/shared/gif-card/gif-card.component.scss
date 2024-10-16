@@ -1,9 +1,35 @@
 .gif-card{
-  border: 1px solid #cccccc;
+  border: 1px solid #cccc;
 }
 
 .loader-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.gif-card{
+  &_image{
+    cursor: pointer;
+  }
+
+  &__footer {
+  right: 5px;
+  bottom: 5px;
+  }
+    &__favorite-button {
+      background-color: #00000080;
+      height: 30px;
+      width: 30px;
+      border-radius: 5px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+
+      &__icon {
+        margin: auto;
+        color: #ffff;
+        cursor: pointer;
+      }
+    }
 }

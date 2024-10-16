@@ -10,19 +10,27 @@
       [src]="imageSrc"
       alt="{{ altText }}"
       [hidden]="isLoading"
+      class="gif-card_image"
       (load)="onLoad()"
       (error)="onError()"
+      (click)="openGifDetails()"
     >
     <div class="gif-card__footer position-absolute">
       @if(from === 'dashboard') {
-        <button class="favorite-button" (click)="toggleFavorite()">
-          <mat-icon>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
-        </button>
+        <div class="gif-card__favorite-button d-fex">
+          <mat-icon
+            class="gif-card__favorite-button__icon"
+            (click)="toggleFavorite()"
+          > {{ isFavorite ? 'favorite' : 'favorite_border' }} </mat-icon>
+        </div>
       }
       @if (from === 'favorites'){
-        <button class="favorite-button" (click)="toggleFavorite()">
-          <mat-icon>{{ 'delete' }}</mat-icon>
-        </button>
+        <div class="gif-card__favorite-button d-fex">
+          <mat-icon
+            class="gif-card__favorite-button__icon"
+            (click)="toggleFavorite()"
+          > {{ 'delete' }} </mat-icon>
+        </div>
       }
     </div>
   </div>

@@ -20,6 +20,6 @@
   class="dashboard__grid"
 >
   @for(gifObject of gifsDataResponse; track gifObject){
-    <app-gif-card [gifObject]="gifObject" [from]="'dashboard'" (click)="onCardClicked(gifObject)"/>
+    <app-gif-card [gifObject]="gifObject" [from]="'dashboard'"/>
   }
 </div>
