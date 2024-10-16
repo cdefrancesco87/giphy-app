@@ -3,7 +3,7 @@ import { GiphyApiService } from '../../services/giphy-api/giphy-api.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { getGifsList, getGifsListFailure, getGifsListSuccess, updateGifsList, updateGifsListSuccess } from './dashboard.actions';
-import { GiphyApiResponse } from '../../models/giphy.model';
+import { GiphyApiGifsListResponse } from '../../models/giphy.model';
 
 @Injectable()
 export class DashboardEffects {
@@ -21,7 +21,7 @@ export class DashboardEffects {
       ofType(getGifsList),
       switchMap((action) =>
         this.giphyApiService.searchGifs(action.query).pipe(
-          map((response: GiphyApiResponse) => {
+          map((response: GiphyApiGifsListResponse) => {
             // localStorage.setItem('gifs', JSON.stringify(response.data));
             localStorage.setItem(
               'offset',
@@ -44,7 +44,7 @@ export class DashboardEffects {
       ofType(updateGifsList),
       switchMap((action) =>
         this.giphyApiService.searchGifs(action.query, action.offset).pipe(
-          map((response: GiphyApiResponse) => {
+          map((response: GiphyApiGifsListResponse) => {
             localStorage.setItem(
               'offset',
               response.pagination.offset.toString()

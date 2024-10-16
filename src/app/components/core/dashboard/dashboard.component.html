@@ -1,22 +1,25 @@
-<div class="dashboard">
-  <div class="dashboard__header">
-    <h1 class="dashboard__title">Search it on giphy</h1>
-    <p class="dashboard__subtitle">Search for your favorite gifs! Insert a keyword and press search to start.</p>
+
+<app-header
+  [title]="'Search it on giphy'"
+  [subtitle]="'Search for your favorite gifs! Insert a keyword and press search to start.'"
+/>
+<app-search-bar (onSearch)="search($event)" (onSort)="sortCards($event)" />
+
+@if(this.gifsDataResponse.length === 0){
+  <div class="text-center align-middle mt-5">
+    <p class="dashboard__no-data">No data found; try to search some new gifs to add to your favorite collection!</p>
   </div>
-  <app-search-bar (onSearch)="search($event)" (onSort)="sortCards($event)"></app-search-bar>
-  <div
-    infiniteScroll
-    [infiniteScrollDistance]="1"
-    (scrolled)="onScrolled()"
-    [scrollWindow]="true"
-    [alwaysCallback]="false"
-    class="dashboard__grid"
-  >
-    @if(this.gifsDataResponse.length === 0){
-      <div class="dashboard__no-data">No data found</div>
-    }
-    @for(gifObject of gifsDataResponse; track gifObject){
-      <app-gif-card [gifObject]="gifObject" [from]="'dashboard'" (click)="onCardClicked(gifObject)"/>
-    }
-  </div>
+}
+
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  (scrolled)="onScrolled()"
+  [scrollWindow]="true"
+  [alwaysCallback]="false"
+  class="dashboard__grid"
+>
+  @for(gifObject of gifsDataResponse; track gifObject){
+    <app-gif-card [gifObject]="gifObject" [from]="'dashboard'" (click)="onCardClicked(gifObject)"/>
+  }
 </div>

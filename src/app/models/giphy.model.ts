@@ -1,10 +1,18 @@
 /**
- * Represents the response from the Giphy API.
+ * Represents the response from the Giphy API gifs list Search.
  */
-export interface GiphyApiResponse {
+export interface GiphyApiGifsListResponse {
   data: GifObject[];
   meta: Meta;
   pagination: Pagination;
+}
+
+/**
+ * Represents the response from the Giphy API single gif response.
+ */
+export interface GiphyApiSingleGifResponse {
+  data: GifObject;
+  meta: Meta;
 }
 
 /**

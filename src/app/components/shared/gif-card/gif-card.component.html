@@ -5,7 +5,7 @@
     </div>
 
   }
-  <div class="image-container" style="position: relative;">
+  <div class="image-container position-relative">
     <img
       [src]="imageSrc"
       alt="{{ altText }}"
@@ -13,7 +13,7 @@
       (load)="onLoad()"
       (error)="onError()"
     >
-    <div class="gif-card__footer" style="position: absolute; bottom: 5px; right: 5\px;">
+    <div class="gif-card__footer position-absolute">
       @if(from === 'dashboard') {
         <button class="favorite-button" (click)="toggleFavorite()">
           <mat-icon>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>

@@ -7,18 +7,21 @@ import { GiphyApiService } from '../../../services/giphy-api/giphy-api.service';
 import { GifObject } from '../../../models/giphy.model';
 import { DashboardFacade } from '../../../store/dashboard/dashboard.facade';
 import { GifCardComponent } from '../../shared/gif-card/gif-card.component';
+import { HeaderComponent } from "../../shared/header/header.component";
+import { Router } from '@angular/router';
+import { NavbarComponent } from "../../shared/navbar/navbar.component";
+
+const MAT_MODULES = [MatGridListModule];
+const SHARED_COMPONENTS = [SearchBarComponent, GifCardComponent, HeaderComponent];
+const DIRECTIVES = [InfiniteScrollDirective];
+
+const SERVICES = [GiphyApiService, DashboardFacade];
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatGridListModule,
-    InfiniteScrollDirective,
-    SearchBarComponent,
-    GifCardComponent,
-  ],
-  providers: [DashboardFacade, GiphyApiService],
+  imports: [CommonModule, MAT_MODULES, SHARED_COMPONENTS, DIRECTIVES, NavbarComponent],
+  providers: [SERVICES],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -27,7 +30,7 @@ export class DashboardComponent {
   public items: string[] = []; // Array for items (not used in current code)
   private dashboardFacade = inject(DashboardFacade); // Injecting DashboardFacade
 
-  constructor(public giphyApiService: GiphyApiService) {
+  constructor(public giphyApiService: GiphyApiService, private router: Router) {
     this.getGifs(); // Fetch initial GIFs
   }
 
@@ -96,7 +99,7 @@ export class DashboardComponent {
    * @returns {void}
    */
   public onCardClicked(gifObject: GifObject): void {
-    console.info('Dashboard GIF ID:', gifObject.id);
+    this.router.navigate([`/gif/${gifObject.id}`]);
   }
 
   public sortCards($event: string): void {

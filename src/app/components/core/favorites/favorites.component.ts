@@ -2,18 +2,22 @@ import { Component } from '@angular/core';
 import { GifCardComponent } from '../../shared/gif-card/gif-card.component';
 import { GifObject } from '../../../models/giphy.model';
 import { FavoriteService } from '../../../services/favorite/favorite.service';
+import { Router } from '@angular/router';
+import { HeaderComponent } from "../../shared/header/header.component";
+
+const SHARED_COMPONENTS = [GifCardComponent, HeaderComponent]; // Array of shared components
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [GifCardComponent],
+  imports: [SHARED_COMPONENTS],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss',
 })
 export class FavoritesComponent {
   public favorites: GifObject[] = []; // Array to hold GIF data
 
-  constructor(private favoriteService: FavoriteService) {
+  constructor(private favoriteService: FavoriteService, private router: Router) {
     // this.getFavorites(); // Fetch initial favorites
   }
 
@@ -25,5 +29,9 @@ export class FavoritesComponent {
 
   public onCardClick(gifObject: GifObject): void {
     // console.info('GIF ID:', gifObject.id);
+  }
+
+  public redirectToHome() {
+    this.router.navigate(['/']);
   }
 }

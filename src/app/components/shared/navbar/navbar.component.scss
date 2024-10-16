@@ -1,0 +1,43 @@
+.navbar {
+  &.navbar-expand-lg {
+    display: flex; // Example style for expanded navbar on large screens
+  }
+
+  &.navbar-light {
+    background-color: #f8f9fa; // Example style for light-themed navbar
+  }
+
+  &.bg-light {
+    background-color: #ffffff; // Example style for light background
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem; // Example style for the brand/logo
+  }
+
+  .navbar-toggler {
+    border: none; // Example style for the toggle button
+
+    .navbar-toggler-icon {
+      background-image: url('data:image/svg+xml,...'); // Example style for the toggle icon
+    }
+  }
+
+  .collapse {
+    &.navbar-collapse {
+      display: flex; // Example style for collapsed navbar
+    }
+  }
+
+  .navbar-nav {
+    list-style: none; // Example style for the navigation list
+
+    .nav-item {
+      margin-right: 1rem; // Example style for each navigation item
+
+      .nav-link {
+        color: #000; // Example style for each navigation link
+      }
+    }
+  }
+}

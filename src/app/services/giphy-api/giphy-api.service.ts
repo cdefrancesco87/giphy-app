@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENDPOINTS} from '../../models/endpoints';
 import { environment } from '../../../environments/environment';
-import { GiphyApiResponse } from '../../models/giphy.model';
+import {
+  GiphyApiGifsListResponse,
+  GiphyApiSingleGifResponse,
+} from '../../models/giphy.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +20,14 @@ export class GiphyApiService {
    * @param query - The search term to query GIFs.
    * @param offset - The starting position of the results (default is 0).
    * @param limit - The maximum number of results to return (default is 50).
-   * @returns An Observable of GiphyApiResponse containing the search results.
+   * @returns An Observable of GiphyApiGifsListResponse containing the search results.
    */
   public searchGifs(
     query: string,
     offset: number = 0,
     limit: number = 50
-  ): Observable<GiphyApiResponse> {
-    return this.http.get<GiphyApiResponse>(
+  ): Observable<GiphyApiGifsListResponse> {
+    return this.http.get<GiphyApiGifsListResponse>(
       `${ENDPOINTS.SEARCH_GIFS}?api_key=${environment.giphyApiKey}&q=${query}&limit=${limit}&offset=${offset}`
     );
   }
@@ -41,8 +44,8 @@ export class GiphyApiService {
     query: string,
     limit = 25,
     offset = 0
-  ): Observable<GiphyApiResponse> {
-    return this.http.get<GiphyApiResponse>(
+  ): Observable<GiphyApiGifsListResponse> {
+    return this.http.get<GiphyApiGifsListResponse>(
       `${ENDPOINTS.SEARCH_STICKERS}/search?api_key=${environment.giphyApiKey}&q=${query}&limit=${limit}&offset=${offset}`
     );
   }
@@ -52,10 +55,13 @@ export class GiphyApiService {
    *
    * @param {number} [limit=25] - The number of GIFs to retrieve. Defaults to 25.
    * @param {number} [offset=0] - The offset for pagination. Defaults to 0.
-   * @returns {Observable<GiphyApiResponse>} An observable containing the response from the Giphy API.
+   * @returns {Observable<GiphyApiGifsListResponse>} An observable containing the response from the Giphy API.
    */
-  public getTrendingGifs(limit = 25, offset = 0): Observable<GiphyApiResponse> {
-    return this.http.get<GiphyApiResponse>(
+  public getTrendingGifs(
+    limit = 25,
+    offset = 0
+  ): Observable<GiphyApiGifsListResponse> {
+    return this.http.get<GiphyApiGifsListResponse>(
       `${ENDPOINTS.TRENDING_GIFS}?api_key=$environment.giphyApiKey}&limit=${limit}&offset=${offset}`
     );
   }
@@ -70,8 +76,8 @@ export class GiphyApiService {
   public getTrengingStickers(
     limit = 25,
     offset = 0
-  ): Observable<GiphyApiResponse> {
-    return this.http.get<GiphyApiResponse>(
+  ): Observable<GiphyApiGifsListResponse> {
+    return this.http.get<GiphyApiGifsListResponse>(
       `${ENDPOINTS.TRENDING_STICKERS}?api_key=${environment.giphyApiKey}&limit=${limit}&offset=${offset}`
     );
   }
@@ -82,8 +88,8 @@ export class GiphyApiService {
    * @param id - The unique identifier of the GIF to be fetched.
    * @returns An Observable that emits the response containing the GIF data.
    */
-  public getGifById(id: string): Observable<any> {
-    return this.http.get<GiphyApiResponse>(
+  public getGifById(id: string): Observable<GiphyApiSingleGifResponse> {
+    return this.http.get<GiphyApiSingleGifResponse>(
       `${ENDPOINTS.GIF_BY_ID}${id}?api_key=${environment.giphyApiKey}`
     );
   }
@@ -92,10 +98,10 @@ export class GiphyApiService {
    * Retrieves a sticker by its unique identifier.
    *
    * @param id - The unique identifier of the sticker.
-   * @returns An Observable that emits the GiphyApiResponse containing the sticker data.
+   * @returns An Observable that emits the GiphyApiGifsListResponse containing the sticker data.
    */
-  public getStickerById(id: string): Observable<GiphyApiResponse> {
-    return this.http.get<GiphyApiResponse>(
+  public getStickerById(id: string): Observable<GiphyApiSingleGifResponse> {
+    return this.http.get<GiphyApiSingleGifResponse>(
       `${ENDPOINTS.STICKER_BY_ID}${id}?api_key=${environment.giphyApiKey}`
     );
   }
