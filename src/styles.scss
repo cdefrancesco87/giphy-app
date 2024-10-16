@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: rgba(0, 0, 0, 0.75);
+}
 
 .dashboard {
   padding: 0 3rem;
@@ -32,4 +36,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   &__no-data {
     font-size: 1.5rem;
   }
+}
+
+.logo-image-wrapper {
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

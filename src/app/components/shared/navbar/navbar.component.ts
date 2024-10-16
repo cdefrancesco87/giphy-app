@@ -13,6 +13,6 @@ export class NavbarComponent {
   @Input() title: string = 'Giphy search gifs app';
   public navigationItems: NavigationItem[] = [
     { url: '/', title: 'Search gifs' },
-    { url: '/favorites', title: 'My Favorites' }
+    { url: '/favorites', title: 'My Favorites' },
   ];
 }

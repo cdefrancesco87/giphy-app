@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GiphyApiService } from '../../../services/giphy-api/giphy-api.service';
 import { DashboardFacade } from '../../../store/dashboard/dashboard.facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -15,13 +16,13 @@ const SERVICES = [GiphyApiService, DashboardFacade];
 @Component({
   selector: 'app-gif-details',
   standalone: true,
-  imports: [MAT_MODULES, SHARED_COMPONENTS],
+  imports: [CommonModule, MAT_MODULES, SHARED_COMPONENTS],
   providers: [SERVICES],
   templateUrl: './gif-details.component.html',
   styleUrl: './gif-details.component.scss',
 })
 export class GifDetailsComponent {
-  public giphyLogoUrl = 'assets/images/giphy-logo.png'; // URL for the Giphy logo
+  public giphyLogoUrl: string = 'assets/images/GIPHY18px.png'; // URL for the Giphy logo
 
   public gifObject: GifObject = {} as GifObject; // Object to hold GIF data
 

@@ -1,39 +1,50 @@
-<app-header [title]="'Gif ' + gifObject.title + ' details'"></app-header>
-<div>
-  <button class="custom-button">
-    <img
-      [src]="giphyLogoUrl"
-      alt="gihpy-logo-branding"
-      class="custom-button-img">
-  </button>
-</div>
+<app-header [title]="gifObject.title"></app-header>
 <div class="container py-5">
+  @if(gifObject.images) {
   <div class="row align-middle">
-    <div class="col-12 col-md-6 text-center">
-      @if(gifObject.images){
-        @if(isLoading){
-          <div class="loader-container" [style.height.px]="imageHeight" [style.width.px]="imageWidth">
-            <mat-spinner></mat-spinner>
-          </div>
-        }
-        <img
-          [src]="imageSrc"
-          alt="{{ altText }}"
-          [hidden]="isLoading"
-          class="gif-card_image"
-          (load)="onLoad()"
-          (error)="onError()"
-        >
-      } @else {
-        <p class="dashboard__no-data">No data found; try to search some new gifs to add to your favorite collection!</p>
+    <div class="col-12 col-md-6 text-center align-middle">
+      @if(isLoading){
+        <div class="loader-container" [style.height.px]="imageHeight" [style.width.px]="imageWidth">
+          <mat-spinner></mat-spinner>
+        </div>
       }
+      <img
+        [src]="imageSrc"
+        alt="{{ altText }}"
+        [hidden]="isLoading"
+        (load)="onLoad()"
+        (error)="onError()"
+      >
     </div>
-    <div class="col-12 col-md-6">
-      <h2>{{ gifObject.title }}</h2>
-      <p>Author: {{ gifObject.username || 'Unknown' }}</p>
-      <p>Rating: {{ gifObject.rating }}</p>
-      <p>Source: <a [href]="gifObject.source" target="_blank">{{ gifObject.source }}</a></p>
+    <div class="col-12 col-md-4">
+      <p><b>Author:</b> {{ (gifObject.user?.display_name + ' (' + gifObject.username + ')') || 'Unknown' }}</p>
+      <p><b>Import date:</b> {{ (gifObject.import_datetime | date: 'dd/MM/yyyy') || 'Unknown' }}</p>
+      <p><b>Rating:</b> {{ (gifObject.rating | uppercase) || 'Unknown' }}</p>
+      <p><b>Source:</b>
+        @if(gifObject.source){
+          <a [href]="gifObject.source" target="_blank">{{ gifObject.source }}</a>
+        } @else {
+          Unknown
+        }
+      </p>
+      <p class="gif-details">
+        @if(gifObject.user?.website_url){
+          <a [href]="gifObject.user?.website_url" target="_blank" class="text-decoration-none me-2">
+            <div class="gif-details__link-wrapper">
+              User's website
+            </div>
+          </a>
+        }
+        <a [href]="gifObject.bitly_url" target="_blank" class="text-decoration-none">
+          <div class="gif-details__link-wrapper">
+            View on Ghiphy
+          </div>
+        </a>
+      </p>
     </div>
     <div class="col-12 col-md-2"></div>
   </div>
+  } @else {
+    <p class="dashboard__no-data">No data found; try to search some new gifs to add to your favorite collection!</p>
+  }
 </div>
