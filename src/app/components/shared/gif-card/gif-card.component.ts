@@ -2,19 +2,23 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GifObject } from '../../../models/giphy.model';
-import { EventEmitter } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { FavoriteService } from '../../../services/favorite/favorite.service';
+
+const MAT_MODULES = [MatProgressSpinnerModule, MatIconModule];
 
 @Component({
   selector: 'app-gif-card',
   standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [CommonModule, MAT_MODULES],
   templateUrl: './gif-card.component.html',
   styleUrl: './gif-card.component.scss',
 })
 export class GifCardComponent {
   @Input() public gifObject: GifObject = {} as GifObject;
+  @Input() public from: string = 'favorites';
 
-  @Output() public onAddToFavorites = new EventEmitter<GifObject>();
+  public isFavorite = false;
 
   public imageSrc: string = '';
   public imageHeight: string = '';
@@ -24,9 +28,15 @@ export class GifCardComponent {
 
   public isLoading = true;
 
-  constructor() {}
+  constructor(private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
+    // Check if the current GIF is in the favorites list
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    this.isFavorite = favorites.some(
+      (gif: GifObject) => gif.id === this.gifObject.id
+    );
+    // Initialize the component properties
     this.imageSrc = this.gifObject.images.fixed_width.url;
     this.imageHeight = this.gifObject.images.fixed_width.height;
     this.imageWidth = this.gifObject.images.fixed_width.width;
@@ -35,15 +45,21 @@ export class GifCardComponent {
   }
 
   /**
-   * Handles the click event on the add GIF to favourites button.
+   * Toggles the favorite status of the current GIF object.
    *
-   * This method is triggered when the user clicks on the add GIF to favourites button.
+   * This method logs the action to the console, switches the `isFavorite`
+   * boolean flag, and calls the `toggleFavorite` method of the `favoriteService`
+   * with the current GIF object.
    *
-   * @returns {void}
+   * @remarks
+   * - The method assumes that `this.gifObject` contains a valid GIF object with an `id` property.
+   * - The `favoriteService` should have a `toggleFavorite` method that handles the logic for adding or removing the GIF from the favorites list.
+   *
    */
-  public addToFavorites(): void {
+  public toggleFavorite(): void {
     console.info('Add to favorites:', this.gifObject.id);
-    this.onAddToFavorites.emit(this.gifObject);
+    this.isFavorite = !this.isFavorite;
+    this.favoriteService.toggleFavorite(this.gifObject);
   }
 
   /**

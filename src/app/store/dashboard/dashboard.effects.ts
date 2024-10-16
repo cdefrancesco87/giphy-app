@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GiphyApiService } from '../../services/giphy-service/giphy-api.service';
+import { GiphyApiService } from '../../services/giphy-api/giphy-api.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { getGifsList, getGifsListFailure, getGifsListSuccess, updateGifsList, updateGifsListSuccess } from './dashboard.actions';

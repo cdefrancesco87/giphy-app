@@ -16,7 +16,7 @@
       <div class="dashboard__no-data">No data found</div>
     }
     @for(gifObject of gifsDataResponse; track gifObject){
-      <app-gif-card [gifObject]="gifObject" (click)="onCardClicked(gifObject)"/>
+      <app-gif-card [gifObject]="gifObject" [from]="'dashboard'" (click)="onCardClicked(gifObject)"/>
     }
   </div>
 </div>

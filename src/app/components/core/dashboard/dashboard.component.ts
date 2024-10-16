@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { GiphyApiService } from '../../../services/giphy-service/giphy-api.service';
+import { GiphyApiService } from '../../../services/giphy-api/giphy-api.service';
 import { GifObject } from '../../../models/giphy.model';
-import { Store } from '@ngrx/store';
 import { DashboardFacade } from '../../../store/dashboard/dashboard.facade';
 import { GifCardComponent } from '../../shared/gif-card/gif-card.component';
 

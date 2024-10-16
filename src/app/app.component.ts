@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GiphyApiService } from './services/giphy-service/giphy-api.service';
+import { GiphyApiService } from './services/giphy-api/giphy-api.service';
 
 @Component({
   selector: 'app-root',
