@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Libraries Used
 - **Angular Material**: For building a responsive and modern UI.
+- **Bootstrap**: To use mode responsive CSS rules.
 - **RxJS**: For handling streams of data and API requests.
 - **ngx-infinite-scroll**: For implementing infinite scrolling.
 
