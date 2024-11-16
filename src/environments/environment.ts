@@ -18,5 +18,5 @@ export const environment = {
   /**
    * Base URL for API requests.
    */
-  giphyApiKey: "dhTc3yRsj1LNS7LX8G47t5vPmyOCoLPv",
+  giphyApiKey: "insert-api-key-here",
 };
